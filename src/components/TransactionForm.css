@@ -1,0 +1,178 @@
+/* Fullscreen container */
+.transaction-form-fullscreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    background-color: #212121; /* Dark background */
+    font-family: 'Arial', sans-serif;
+    position: relative; /* For the back button */
+}
+.customers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    /* background-color: #f9f9f9; */
+}
+
+.customer-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.customer-card:hover {
+    transform: translateY(-5px);
+}
+
+.customer-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333333;
+}
+
+.customer-total {
+    font-size: 1.1rem;
+    color: #555555;
+    margin-bottom: 15px;
+}
+
+.unpaid-amount {
+    font-weight: bold;
+    color: #d9534f; /* Red for unpaid */
+}
+
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    background-color: #ffffff;
+}
+
+.transactions-table th, .transactions-table td {
+    border: 1px solid #dddddd;
+    padding: 10px;
+    text-align: left;
+    color: 'black';
+}
+
+.transactions-table th {
+    background-color: #f5f5f5;
+    color: #555555;
+}
+
+.transactions-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.transactions-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.status-paid {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 80;
+}
+
+.mark-paid-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.mark-paid-button:hover {
+    background-color: #0056b3;
+}
+
+/* Back button in the top-left corner */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #f39c12; /* Gold color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #e67e22; /* Slightly darker gold on hover */
+}
+
+/* Centered form */
+.transaction-form {
+    width: 100%;
+    max-width: 400px; /* Limit form width */
+    background-color: black; /* Black background for the form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Heading */
+.transaction-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #f39c12; /* Gold color */
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #f39c12; /* Gold for labels */
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+    background-color: #2c3e50; /* Dark gray background for inputs */
+    color: white; /* White text color */
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #f39c12; /* Gold border on focus */
+    outline: none;
+}
+
+/* Submit button */
+.submit-button {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #f39c12; /* Gold background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #e67e22; /* Darker gold on hover */
+}

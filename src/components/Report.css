@@ -1,0 +1,158 @@
+/* Report container styling */
+.report-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #a2b9bc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Heading */
+.report-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Filters section */
+.filters {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 calc(33% - 20px); /* Adjust to fit three fields in a row */
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #f8f8f8;
+    outline: none;
+}
+
+/* Generate button */
+.generate-button {
+    padding: 10px 20px;
+    background-color: #a2b9bc;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: auto; /* Align with inputs */
+    height: 42px;
+    align-self: center;
+    transition: background-color 0.3s;
+}
+
+.generate-button:hover {
+    background-color: #a2b9bc;
+}
+
+/* Table styling */
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+}
+
+.report-table thead {
+    background-color: #a2b9bc;
+    color: white;
+}
+
+.report-table th,
+.report-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.report-table tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+.no-data {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+}
+/* Edit Form Styles */
+.edit-form {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.edit-form h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.edit-form .form-group {
+    margin-bottom: 15px;
+}
+
+.edit-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.edit-form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.edit-form button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.edit-form button:hover {
+    background-color: #45a049;
+}
+
+.edit-form button[type="button"] {
+    background-color: #f44336;
+}
+
+.edit-form button[type="button"]:hover {
+    background-color: #e53935;
+}
