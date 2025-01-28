@@ -253,31 +253,28 @@ const handleMarkAsPaid = async (transactionId, customerId) => {
 
                 {/* Transactions Table */}
                 <div >
-                    <h2>Transactions</h2>
+                    <h2 className="title">Transactions</h2>
                 
-                    <div className="dashboard-button-container">
+                    <div className="button-container">
+  <div>
     <Link to="/add-transaction">
-        <button className="mark-paid-button">Add Transaction</button>
+      <button className="mark-paid-button">Add Transaction</button>
     </Link>
-</div>
-<div >
-    {/* <Link to="/add-transaction">
-        <button className="dashboard-button">Add Transaction</button>
-    </Link> */}
+  </div>
+  <div>
     <input 
-        type="file" 
-        accept=".xlsx, .xls" 
-        onChange={handleFileChange} 
-        style={{ display: "none" }} 
-        ref={fileInputRef} 
-      />
-
-      {/* Button to trigger file input */}
-      <button className="mark-paid-button" onClick={handleClick}>
-        Import from Excel
-      </button>
-
+      type="file" 
+      accept=".xlsx, .xls" 
+      onChange={handleFileChange} 
+      style={{ display: "none" }} 
+      ref={fileInputRef} 
+    />
+    <button className="mark-paid-button" onClick={handleClick}>
+      Import from Excel
+    </button>
+  </div>
 </div>
+
 
 
 

@@ -22,6 +22,23 @@ function TransactionList() {
     const handleEditTranset = (transaction) => {
         navigate(`/transaction/edit/${transaction.TransactionId}`, { state: transaction });
     };
+    const fetchTransaction = useCallback(async () => {
+        setFilters({
+            fromDate: '',
+            toDate: '',
+            customerId: '',
+            price: '',
+            vehicleType: '',
+        });
+        try {
+            const res = await axios.get('http://localhost:5000/transactions');
+            setTransactions(res.data);
+        } catch (error) {
+            console.error(error);
+            alert('Failed to fetch transactions.');
+        }
+    }, [setFilters, setTransactions]);
+    
         // setFormData({
         //     TransactionId: transaction.TransactionId,
         //     CustomerId: transaction.CustomerId,
@@ -52,7 +69,9 @@ function TransactionList() {
 const handleDeleteTransaction = useCallback((id) => {
     axios.delete(`http://localhost:5000/transactions/${id}`)
         .then(() => {
-            setTransactions(transactions.filter(transaction => transaction.TransactionId !== id));
+            setTransactions((prevTransactions) =>
+                prevTransactions.filter((transaction) => transaction.TransactionId !== id)
+            );
             alert('Transaction deleted successfully');
             fetchTransaction();
         })
@@ -60,7 +79,8 @@ const handleDeleteTransaction = useCallback((id) => {
             console.error('Error deleting transaction:', err);
             alert('Failed to delete transaction');
         });
-},[formData]);
+}, [fetchTransaction]);
+
 const exportToExceltransactions = (transactionId) => {
     const transaction = transactions.find((t) => t.TransactionId === transactionId);
     if (!transaction) {
@@ -139,18 +159,7 @@ const fetchReport = async () => {
         alert('Failed to fetch transaction.');
     }
 };
-const fetchTransaction = async () => {
-    setFilters({
-        fromDate: '', toDate: '', customerId: '',price:'',vehicleType:''
-    })
-    try {
-        const res = await axios.get('http://localhost:5000/transactions');
-        setTransactions(res.data);
-    } catch (error) {
-        console.error(error);
-        alert('Failed to fetch transaction.');
-    }
-};
+
 useEffect(() => {
     axios.get('http://localhost:5000/customers')
     .then((res) => {
@@ -172,14 +181,7 @@ useEffect(() => {
 
 
 // Utility function to generate random colors for the chart
-const getRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-};
+
 
 
     return (
@@ -190,7 +192,7 @@ const getRandomColor = () => {
 
                 {/* Transactions Table */}
                 <div >
-                    <h2>Transactions</h2>
+                    <h2 className="title">Transactions</h2>
                     <div className="filters">
                         <div className="form-group">
                             <label htmlFor="fromDate">From Date</label>

@@ -98,7 +98,7 @@ function Report() {
 
                 <main >
                     {/* <div className="report-container"> */}
-                        <h2>Transaction Report</h2>
+                        <h2 className="title">Transaction Report</h2>
                         <div className="filters">
                             <div className="form-group">
                                 <label htmlFor="fromDate">From Date</label>

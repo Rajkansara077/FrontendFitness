@@ -38,7 +38,7 @@ function TransactionForm() {
             
             {/* <div className="card"> */}
             <form onSubmit={handleSubmit} className="customer-form">
-              <h2 className="text-white text-center text-2xl font-bold mb-4">Add New Transaction</h2>
+              <h2 className="title"> Add New Transaction</h2>
             
                <label htmlFor="CustomerId" >Select Customer</label>
                                 <select

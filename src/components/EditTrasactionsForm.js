@@ -61,7 +61,7 @@ function EdittransactionForm() {
             console.error(error);
             alert('Failed to update transaction.');
         }
-    }, [formData]);
+    }, [formData,navigate]);
 
     return (
         <><div className="main-content">
@@ -72,7 +72,7 @@ function EdittransactionForm() {
                     <div className="modal-overlay">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h3>Edit Transaction</h3>
+                                <h3 className="title">Edit Transaction</h3>
                                
                             </div>
                             <form onSubmit={handleEditTransaction}>

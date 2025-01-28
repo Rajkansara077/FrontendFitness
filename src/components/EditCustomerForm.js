@@ -34,7 +34,7 @@ console.log('this is customers',customerId);
             console.error(error);
             alert('Failed to update customer details.');
         }
-    }, [formData]); 
+    }, [customerId,navigate,formData]); 
 
     return (
         <><div className="main-content">

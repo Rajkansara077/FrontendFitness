@@ -8,7 +8,7 @@ import EditCustomerForm from './components/EditCustomerForm';
 import Navbar from './components/NavBar';
 import CustomerList from './components/CustomerList';
 import TransactionList from './components/TransactionList';
-import Footer from './components/Footer';
+
 import LoginWithOTP from './components/Login';
 import EdittransactionForm from './components/EditTrasactionsForm';
 import Customervise from './components/CustomerVise';

@@ -6,8 +6,7 @@ import * as XLSX from 'xlsx';
 function CustomerList() {
     const navigate = useNavigate();
     const [customers, setCustomers] = useState([]);
-    const [editingCustomerId, setEditingCustomerId] = useState(null);
-    const [editData, setEditData] = useState({ CustomerName: '', MobileNo: '' });
+  
     // Fetch customers on page load
    
  // Handle editing of customer details
@@ -36,7 +35,7 @@ const handleEdit = (customer) => {
             console.error('Error deleting customer:', err);
             alert('Failed to delete customer');
         });
-},[]);
+},[ setCustomers,customers]);
 const fetchReport = async () => {
     try {
         const res = await axios.get('http://localhost:5000/customers');
@@ -47,17 +46,7 @@ const fetchReport = async () => {
     }
 };
  // Handle the form submission for editing customer details
- const handleEditSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    try {
-        await axios.patch(`http://localhost:5000/customers/${editingCustomerId}`, editData);
-        alert('Customer details updated successfully!');
-        setEditingCustomerId(null);  // Close the edit form
-    } catch (error) {
-        console.error(error);
-        alert('Failed to update customer details.');
-    }
-}, [editingCustomerId, editData]);  // Add dependencies here
+
 useEffect(() => {
     axios.get('http://localhost:5000/customers')
         .then((res) => {
@@ -66,7 +55,7 @@ useEffect(() => {
         .catch((err) => {
             console.error('Error fetching customer data:', err);
         });
-}, [handleDeleteCustomer,handleEditSubmit]);
+}, []);
 const exportCustomerToExcel = (customer) => {
     const formattedData = [
         {
@@ -89,7 +78,7 @@ const exportCustomerToExcel = (customer) => {
         <div className="main-content">
         <main >
             <div className="table-container">
-                <h2>Customers</h2>
+                <h2 className="title">Customers</h2>
                 
                 {/* <Link to="/add-customer">
                     <button className="dashboard-button">Add Customer</button>

@@ -11,7 +11,30 @@
     align-items: center;
     z-index: 1000;
 }
-
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .mark-paid-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .mark-paid-button:hover {
+    background-color: #0056b3;
+  }
+  .title {
+    margin: 20px 0 40px; /* Adds vertical space */
+    font-size: 24px; /* Optional: Adjusts title size */
+  }
 /* Modal content container */
 .customer-form-modal {
     background-color: #fff;
