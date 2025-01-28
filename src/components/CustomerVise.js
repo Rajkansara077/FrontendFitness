@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback ,useRef} from 'react';
 import axios from 'axios';
-import { data, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import './TransactionPage.css'; // Add custom styles here
 import * as XLSX from 'xlsx'; 
 function TransactionList() {
@@ -8,7 +8,6 @@ function TransactionList() {
     const [transactions, setTransactions] = useState([]);
     const [customers, setCustomers] = useState([]);
     const fileInputRef = useRef(null);
-    const [filters, setFilters] = useState({ fromDate: '', toDate: '', customerId: '',price:'',vehicleType:'' });
     const [formData, setFormData] = useState({
         TransactionId: '',
         CustomerId: '',
@@ -20,128 +19,14 @@ function TransactionList() {
     const [showModal, setShowModal] = useState(false);
     // Fetch transactions on page load
     const [importedData, setImportedData] = useState([]);
-    const [selectedEntries, setSelectedEntries] = useState([]);
 
-    const handleSelectImportedData = (data, isSelected) => {
-        setSelectedEntries((prev) =>
-            isSelected
-                ? [...prev, data]
-                : prev.filter((entry) => entry.TransactionId !== data.TransactionId)
-        );
-    };
 
-    const handleSendToDatabase = async () => {
-        if (selectedEntries.length === 0) {
-            alert("Please select entries to send.");
-            return;
-        }
-
-        const dataToSend = selectedEntries.map((entry) => {
-            const { OperationDate, TransactionId, ...rest } = entry;
-            return {
-                ...rest,
-                OperationDate: new Date(OperationDate).toISOString().split("T")[0], // Convert to ISO date format
-            };
-        });
-
-        try {
-            const response = await fetch("http://localhost:5000/api/transactions/bulk", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(dataToSend),
-            });
-
-            if (response.ok) {
-                fetchTransaction();
-                alert("Transactions added successfully!");
-                setSelectedEntries([]); // Reset selection
-                setShowModal(false); // Close modal
-            } else {
-                console.error("Error:", await response.text());
-                alert("Failed to add transactions.");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("An error occurred. Please try again later.");
-        }
-    };
 
     const handleClick = () => {
         fileInputRef.current.click();
     };
-    const processExcelFile = async (file) => {
-        try {
-          // Step 1: Parse the Excel file
-          const reader = new FileReader();
-          reader.onload = async (e) => {
-            const data = new Uint8Array(e.target.result);
-            const workbook = XLSX.read(data, { type: 'array' });
-            const sheetName = workbook.SheetNames[0]; // Use the first sheet
-            const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-      
-            console.log('Parsed Data:', sheetData);
-      
-            for (const row of sheetData) {
-              const { CustomerName, VehicleNo, OperationDate, VehicleType, Price } = row;
-      
-              // Step 2: Check if the customer exists
-              let customerId;
-              try {
-                const customerResponse = await axios.get(`http://localhost:5000/customers`, {
-                  params: { CustomerName },
-                });
-      
-                if (customerResponse.data && customerResponse.data.length > 0) {
-                  // Customer exists
-                  customerId = customerResponse.data[0].CustomerId;
-                  console.log(`Customer exists: ${CustomerName}, ID: ${customerId}`);
-                } else {
-                  // Customer does not exist, create customer
-                  const newCustomer = await axios.post('http://localhost:5000/customers', {
-                    CustomerName,
-                    MobileNo: '0000000000', // Default mobile number if not in Excel
-                  });
-      
-                  customerId = newCustomer.data.customer.CustomerId;
-                  console.log(`New Customer created: ${CustomerName}, ID: ${customerId}`);
-                }
-              } catch (error) {
-                console.error('Error checking or creating customer:', error);
-                continue; // Skip this row if there's an error
-              }
-      
-              // Step 3: Create the transaction
-              try {
-                const transactionResponse = await axios.post('http://localhost:5000/transactions', {
-                  VehicleNo,
-                  OperationDate: new Date(OperationDate).toISOString().split('T')[0], // Convert to ISO format
-                  VehicleType: VehicleType || 'N/A',
-                  Price,
-                  CustomerId: customerId,
-                });
-      
-                console.log('Transaction created:', transactionResponse.data);
-              } catch (error) {
-                console.error('Error creating transaction:', error);
-              }
-            }
-          };
-      
-          reader.onerror = (error) => {
-            console.error('FileReader Error:', error);
-          };
-      
-          reader.readAsArrayBuffer(file);
-        } catch (error) {
-          console.error('Error processing Excel file:', error);
-        }
-      };
-      const handleFileUpload = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    processExcelFile(file);
-  }
-};
+   
+ 
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -207,7 +92,7 @@ function TransactionList() {
 const handleDeleteTransaction = useCallback((id) => {
     axios.delete(`http://localhost:5000/transactions/${id}`)
         .then(() => {
-            setTransactions(transactions.filter(transaction => transaction.TransactionId !== id));
+            // setTransactions(transactions.filter(transaction => transaction.TransactionId !== id));
             alert('Transaction deleted successfully');
             fetchTransaction();
         })
@@ -215,7 +100,7 @@ const handleDeleteTransaction = useCallback((id) => {
             console.error('Error deleting transaction:', err);
             alert('Failed to delete transaction');
         });
-},[formData]);
+},[]);
 const exportToExceltransactions = (customerId) => {
     // Find the selected customer's data
     const selectedCustomer = transactions.find((customer) => customer.CustomerId === customerId);
@@ -281,23 +166,8 @@ const exportToExceltransactions = (customerId) => {
 };
 
 
-
-
-
-
-const fetchReport = async () => {
-    try {
-        const res = await axios.get('http://localhost:5000/transactions/filter', { params: filters });
-        setTransactions(res.data);
-    } catch (error) {
-        console.error(error);
-        alert('Failed to fetch transaction.');
-    }
-};
 const fetchTransaction = async () => {
-    setFilters({
-        fromDate: '', toDate: '', customerId: '',price:'',vehicleType:''
-    })
+   
     try {
         const res = await axios.get('http://localhost:5000/transactions/group');
         setTransactions(res.data);
@@ -372,15 +242,7 @@ const handleMarkAsPaid = async (transactionId, customerId) => {
 };
 
 
-// Utility function to generate random colors for the chart
-const getRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-};
+
 
 
     return (
