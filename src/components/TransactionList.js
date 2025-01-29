@@ -116,7 +116,7 @@ const exportToExceltransactions = (transactionId) => {
             CustomerName: "",
         },
         {
-            TransactionId: "", // Leave AutoId empty
+            TransactionId: "", // Leave TransactionId empty
             VehicleNo: "",
             OperationDate: "",
             VehicleType: "Total Amount", // Label for total amount
@@ -124,7 +124,7 @@ const exportToExceltransactions = (transactionId) => {
             CustomerName: "",
         },
         {
-            TransactionId: "", // Leave AutoId empty
+            TransactionId: "", // Leave TransactionId empty
             VehicleNo: "",
             OperationDate: "",
             VehicleType: "Paid Amount", // Label for paid amount
@@ -132,7 +132,7 @@ const exportToExceltransactions = (transactionId) => {
             CustomerName: "",
         },
         {
-            TransactionId: "", // Leave AutoId empty
+            TransactionId: "", // Leave TransactionId empty
             VehicleNo: "",
             OperationDate: "",
             VehicleType: "Unpaid Amount", // Label for unpaid amount

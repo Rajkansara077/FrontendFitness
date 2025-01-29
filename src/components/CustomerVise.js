@@ -115,6 +115,7 @@ const exportToExceltransactions = (customerId) => {
     // Format the data for Excel
     const formattedData = selectedCustomer.Transactions.map((transaction) => ({
         TransactionId: transaction.TransactionId,
+        CustomerName: transaction.Customer?.CustomerName || '',
         VehicleNo: transaction.VehicleNo,
         OperationDate: new Date(transaction.OperationDate).toLocaleDateString(),
         VehicleType: transaction.VehicleType || "N/A",

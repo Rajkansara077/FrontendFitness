@@ -67,7 +67,6 @@ function EdittransactionForm() {
         <><div className="main-content">
            
                 <main >
-                <h2 className="text-white text-center text-2xl font-bold mb-4">Edit Customer</h2>
                 {formData.TransactionId && (
                     <div className="modal-overlay">
                         <div className="modal-content">

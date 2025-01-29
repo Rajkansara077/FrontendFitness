@@ -25,7 +25,7 @@ function Report() {
  // Export the report to Excel
  const exportToExcel = () => {
     const formattedData = report.map((transaction, index) => ({
-        AutoId: index + 1, // Generate an auto-incremented ID starting from 1
+        TransactionId: index + 1, // Generate an auto-incremented ID starting from 1
         VehicleNo: transaction.VehicleNo,
         OperationDate: new Date(transaction.OperationDate).toLocaleDateString(), // Format date
         VehicleType: transaction.VehicleType || 'N/A',
@@ -45,7 +45,7 @@ function Report() {
     formattedData.push(
         {}, // Add an empty row for spacing
         {
-            AutoId: '', // Leave AutoId empty for the total row
+            TransactionId: '', // Leave TransactionId empty for the total row
             VehicleNo: '',
             OperationDate: '',
             VehicleType: '', // Label for the summary section
@@ -54,7 +54,7 @@ function Report() {
             MobileNo: ''
         },
         {
-            AutoId: '', // Leave AutoId empty
+            TransactionId: '', // Leave TransactionId empty
             VehicleNo: '',
             OperationDate: '',
             VehicleType: 'Total Amount', // Label for total amount
@@ -63,7 +63,7 @@ function Report() {
             MobileNo: ''
         },
         {
-            AutoId: '', // Leave AutoId empty
+            TransactionId: '', // Leave TransactionId empty
             VehicleNo: '',
             OperationDate: '',
             VehicleType: 'Paid Amount', // Label for paid amount
@@ -72,7 +72,7 @@ function Report() {
             MobileNo: ''
         },
         {
-            AutoId: '', // Leave AutoId empty
+            TransactionId: '', // Leave TransactionId empty
             VehicleNo: '',
             OperationDate: '',
             VehicleType: 'Unpaid Amount', // Label for unpaid amount

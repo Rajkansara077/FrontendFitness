@@ -1,11 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Dashboard.css'; // Add custom styles here.
-import logo from '../assests/logo.jpg';
 
 function Dashboard() {
-  const [count, setCount] = useState([]);
-  const [transactions, setTransactions] = useState([]);
+  const [count, setCount] = useState({});
   const [currentMonthTransactions, setCurrentMonthTransactions] = useState(0);
   const [overallAmount, setOverallAmount] = useState(0);
 
@@ -33,7 +31,6 @@ function Dashboard() {
       .get('http://localhost:5000/transactions')
       .then((res) => {
         const transactionsData = res.data;
-        setTransactions(transactionsData);
 
         // Calculate current month's transactions
         const currentMonth = new Date().getMonth();
@@ -43,11 +40,17 @@ function Dashboard() {
           return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
         });
 
-        const thisMonthTotal = thisMonthTransactions.reduce((sum, transaction) => sum + (transaction.Price || 0), 0);
+        const thisMonthTotal = thisMonthTransactions.reduce(
+          (sum, transaction) => sum + (transaction.Price || 0),
+          0
+        );
         setCurrentMonthTransactions(thisMonthTotal);
 
         // Calculate overall amount
-        const totalAmount = transactionsData.reduce((sum, transaction) => sum + (transaction.Price || 0), 0);
+        const totalAmount = transactionsData.reduce(
+          (sum, transaction) => sum + (transaction.Price || 0),
+          0
+        );
         setOverallAmount(totalAmount);
       })
       .catch((err) => {
@@ -65,7 +68,7 @@ function Dashboard() {
                 <span className="stat-time">Customers</span>
               </div>
               <div className="stat-body">
-                <p className="stat-value">{count.totalCustomers}</p>
+                <p className="stat-value">{count.totalCustomers || 0}</p>
               </div>
             </div>
 
@@ -74,7 +77,7 @@ function Dashboard() {
                 <span className="stat-time">Cars</span>
               </div>
               <div className="stat-body">
-                <p className="stat-value">{count.totalCars}</p>
+                <p className="stat-value">{count.totalCars || 0}</p>
               </div>
             </div>
 
