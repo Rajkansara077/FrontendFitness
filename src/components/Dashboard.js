@@ -6,8 +6,7 @@ import './Dashboard.css'; // Add custom styles here.
 
 function Dashboard() {
   const [count, setCount] = useState([]);
-  const [transactions, setTransactions] = useState([]);
-  console.log('this is transactions',transactions);
+ 
   const [transactionsfilter, setTransactionsfilter] = useState([]);
     const [customers, setCustomers] = useState([]);
     const [formData, setFormData] = useState({ CustomerId: '',  });

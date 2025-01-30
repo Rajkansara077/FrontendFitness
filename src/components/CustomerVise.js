@@ -114,13 +114,17 @@ const exportToExceltransactions = (customerId) => {
     const sheetName = selectedCustomer.CustomerName?.slice(0, 31) || "Transaction Report";
 
     // Format the data for Excel
-    const formattedData = selectedCustomer.Transactions.map((transaction) => ({
-        TransactionId: transaction.TransactionId,
-        CustomerName: transaction.Customer?.CustomerName || '',
-        VehicleNo: transaction.VehicleNo,
-        OperationDate: new Date(transaction.OperationDate).toLocaleDateString(),
-        VehicleType: transaction.VehicleType || "N/A",
-        Price: transaction.Price,
+    const formattedData = selectedCustomer.Transactions.map((transaction, index) => ({
+      NO: index + 1, // Auto-increment ID
+      DATE: new Date(transaction.OperationDate).toLocaleDateString(), 
+      "AGENT NAME": transaction.Customer?.CustomerName || '', 
+      "VEHICLE NUMBER": transaction.VehicleNo,
+      "VEHICLE TYPE": transaction.VehicleType || 'N/A',
+        // OperationDate: new Date(transaction.OperationDate).toLocaleDateString(),
+    
+        PRICE: transaction.Price,
+        NOTES: transaction.Notes,
+                MOBILENUMBER: transaction.Customer?.MobileNo || '',
         Status: transaction.IsPaid ? "Paid" : "Unpaid",
     }));
 
@@ -135,27 +139,35 @@ const exportToExceltransactions = (customerId) => {
     // Add summary rows
     formattedData.push({}, // Add an empty row for spacing
         {
-            TransactionId: "",
-            VehicleNo: "",
-            OperationDate: "",
-            VehicleType: "",
-            Price: `Total Amount: ₹${totalAmount}`,
+           NO: '',
+            DATE: '',
+            "AGENT NAME": '',
+            "VEHICLE NUMBER": '',
+            "VEHICLE TYPE": '',
+            PRICE: `Total Amount: ₹${totalAmount}`,
+             NOTES:'',            MOBILENUMBER: '',
             Status: "",
         },
         {
-            TransactionId: "",
-            VehicleNo: "",
-            OperationDate: "",
-            VehicleType: "",
-            Price: `Paid Amount: ₹${paidAmount}`,
+            NO: '',
+            DATE: '',
+            "AGENT NAME": '',
+            "VEHICLE NUMBER": '',
+            "VEHICLE TYPE": '', 
+            PRICE: `Paid Amount: ₹${paidAmount}`,
+             NOTES:'',  
+            MOBILENUMBER: '',
             Status: "",
         },
         {
-            TransactionId: "",
-            VehicleNo: "",
-            OperationDate: "",
-            VehicleType: "",
-            Price: `Unpaid Amount: ₹${unpaidAmount}`,
+            NO: '',
+            DATE: '',
+            "AGENT NAME": '',
+            "VEHICLE NUMBER": '',
+            "VEHICLE TYPE": '',
+            PRICE: `Unpaid Amount: ₹${unpaidAmount}`,
+            NOTES:'',  
+            MOBILENUMBER: '',
             Status: "",
         }
     );
@@ -332,6 +344,7 @@ const filteredTransactions = transactions.filter((customer) =>
                     <th>Vehicle Type</th>
                     <th>Operation Date</th>
                     <th>Status</th>
+                    <th>Notes</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -352,6 +365,7 @@ const filteredTransactions = transactions.filter((customer) =>
                                 </button>
                             )}
                         </td>
+                        <td className="status-paid">{transaction.Notes || 'N/A'}</td>
                         <td>
                             <button onClick={() => handleEditTranset(transaction)}>Edit</button>
                             <button onClick={() => handleDeleteTransaction(transaction.TransactionId)}>Delete</button>

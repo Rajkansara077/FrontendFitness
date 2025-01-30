@@ -16,6 +16,7 @@ function TransactionList() {
         OperationDate: '',
         Price: '',
         VehicleType: '',
+        Notes: '',
     });
     // Fetch transactions on page load
    
@@ -59,7 +60,8 @@ function TransactionList() {
             CustomerId: '',
             VehicleNo: '',
             Price: '',     
-            VehicleType: '' ,      OperationDate: ''
+            VehicleType: '' ,      OperationDate: '',
+            Notes: '',
         }); // Reset form data
     } catch (error) {
         console.error(error);
@@ -81,7 +83,7 @@ const handleDeleteTransaction = useCallback((id) => {
         });
 }, [fetchTransaction]);
 
-const exportToExceltransactions = (transactionId) => {
+const exportToExceltransactions = (transactionId,index) => {
     const transaction = transactions.find((t) => t.TransactionId === transactionId);
     if (!transaction) {
         alert("Transaction not found.");
@@ -90,12 +92,15 @@ const exportToExceltransactions = (transactionId) => {
 
     const formattedData = [
         {
-            TransactionId: transaction.TransactionId,
-            VehicleNo: transaction.VehicleNo,
-            OperationDate: new Date(transaction.OperationDate).toLocaleDateString(), // Format date
-            VehicleType: transaction.VehicleType || 'N/A',
-            Price: transaction.Price,
-            CustomerName: transaction.Customer?.CustomerName || '', // Flatten CustomerName
+         NO: index + 1, // Auto-increment ID
+        DATE: new Date(transaction.OperationDate).toLocaleDateString(),  "AGENT NAME": transaction.Customer?.CustomerName || '', 
+        "VEHICLE NUMBER": transaction.VehicleNo,
+        "VEHICLE TYPE": transaction.VehicleType || 'N/A',
+        PRICE: transaction.Price,
+        NOTES: transaction.Notes,
+        // Flatten CustomerName
+        MOBILENUMBER: transaction.Customer?.MobileNo || '',
+            Status: transaction.IsPaid ? "Paid" : "Unpaid",  // Flatten CustomerName
         },
     ];
 
@@ -108,36 +113,45 @@ const exportToExceltransactions = (transactionId) => {
     formattedData.push(
         {},
         {
-            TransactionId: "", // Label for the summary section
-            VehicleNo: "",
-            OperationDate: "",
-            VehicleType: "",
-            Price: "", // Leave price blank for summary header
-            CustomerName: "",
+            NO: '',
+            DATE: '',
+            "AGENT NAME": '',
+            "VEHICLE NUMBER": '',
+            "VEHICLE TYPE": 'Total Amount', // Label
+            PRICE: "", // Leave price blank for summary header
+          NOTES:'',            MOBILENUMBER: '',
+          Status: "",
+
         },
         {
-            TransactionId: "", // Leave TransactionId empty
-            VehicleNo: "",
-            OperationDate: "",
-            VehicleType: "Total Amount", // Label for total amount
-            Price: `₹${totalPrice}`, // Total value
-            CustomerName: "",
+            NO: '',
+            DATE: '',
+            "AGENT NAME": '',
+            "VEHICLE NUMBER": '',
+            "VEHICLE TYPE": 'Total Amount', // Label for total amount
+            PRICE: `₹${totalPrice}`, // Total value
+            NOTES:'',            MOBILENUMBER: '',
+          Status: "",
         },
         {
-            TransactionId: "", // Leave TransactionId empty
-            VehicleNo: "",
-            OperationDate: "",
-            VehicleType: "Paid Amount", // Label for paid amount
-            Price: `₹${paidAmount}`, // Paid value
-            CustomerName: "",
+            NO: '',
+            DATE: '',
+            "AGENT NAME": '',
+            "VEHICLE NUMBER": '',
+            "VEHICLE TYPE": 'Paid Amount', // Label for paid amount
+            PRICE: `₹${paidAmount}`, // Paid value
+            NOTES:'',            MOBILENUMBER: '',
+          Status: "",
         },
         {
-            TransactionId: "", // Leave TransactionId empty
-            VehicleNo: "",
-            OperationDate: "",
-            VehicleType: "Unpaid Amount", // Label for unpaid amount
-            Price: `₹${unpaidAmount}`, // Unpaid value
-            CustomerName: "",
+            NO: '',
+            DATE: '',
+            "AGENT NAME": '',
+            "VEHICLE NUMBER": '',
+            "VEHICLE TYPE": 'Unpaid Amount', // Label for unpaid amount
+            PRICE: `₹${unpaidAmount}`, // Unpaid value
+            NOTES:'',            MOBILENUMBER: '',
+          Status: "",
         }
     );
 
@@ -271,6 +285,7 @@ useEffect(() => {
             <th>VehicleType</th>
             <th>Operation Date</th>
             <th>Status</th>
+            <th>Notes</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -286,6 +301,7 @@ useEffect(() => {
                     <td>{transaction.VehicleType || 'N/A'}</td>
                     <td>{new Date(transaction.OperationDate).toLocaleDateString()}</td>
                     <td>{transaction.IsPaid ? 'Paid' : 'Not Paid'}</td>
+                    <td>{transaction.Notes || 'N/A'}</td>
                     <td>
                         <button onClick={() => handleEditTranset(transaction)}>Edit</button>
                         <button onClick={() => handleDeleteTransaction(transaction.TransactionId)}>Delete</button>
@@ -365,6 +381,15 @@ useEffect(() => {
                                             id="VehicleType"
                                             value={formData.VehicleType}
                                             onChange={(e) => setFormData({ ...formData, VehicleType: e.target.value })}
+                                            required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="Notes">Notes:</label>
+                                        <input
+                                            type="text"
+                                            id="Notes"
+                                            value={formData.Notes}
+                                            onChange={(e) => setFormData({ ...formData, Notes: e.target.value })}
                                             required />
                                     </div>
                                     <div className="form-group">

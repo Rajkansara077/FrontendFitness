@@ -25,13 +25,16 @@ function Report() {
  // Export the report to Excel
  const exportToExcel = () => {
     const formattedData = report.map((transaction, index) => ({
-        TransactionId: index + 1, // Generate an auto-incremented ID starting from 1
-        VehicleNo: transaction.VehicleNo,
-        OperationDate: new Date(transaction.OperationDate).toLocaleDateString(), // Format date
-        VehicleType: transaction.VehicleType || 'N/A',
-        Price: transaction.Price,
-        CustomerName: transaction.Customer?.CustomerName || '', // Flatten CustomerName
-        MobileNo: transaction.Customer?.MobileNo || '' // Include MobileNo if required
+        NO: index + 1, // Auto-increment ID
+        DATE: new Date(transaction.OperationDate).toLocaleDateString(), // Format date
+        "AGENT NAME": transaction.Customer?.CustomerName || '', 
+        "VEHICLE NUMBER": transaction.VehicleNo,
+        "VEHICLE TYPE": transaction.VehicleType || 'N/A',
+        PRICE: transaction.Price,
+        NOTES: transaction.Notes,
+        // Flatten CustomerName
+        MOBILENUMBER: transaction.Customer?.MobileNo || '',
+        Status: transaction.IsPaid ? "Paid" : "Unpaid", // Include MobileNo
     }));
 
     // Calculate the total, paid, and unpaid amounts
@@ -41,53 +44,50 @@ function Report() {
         .reduce((sum, transaction) => sum + (transaction.Price || 0), 0);
     const unpaidAmount = totalAmount - paidAmount;
 
-    // Add summary rows
+    // Add summary rows with correct structure
     formattedData.push(
-        {}, // Add an empty row for spacing
+        {}, // Empty row for spacing
         {
-            TransactionId: '', // Leave TransactionId empty for the total row
-            VehicleNo: '',
-            OperationDate: '',
-            VehicleType: '', // Label for the summary section
-            Price: '', // No price in the header row
-            CustomerName: '',
-            MobileNo: ''
+            NO: '',
+            DATE: '',
+            "AGENT NAME": '',
+            "VEHICLE NUMBER": '',
+            "VEHICLE TYPE": 'Total Amount', // Label
+            PRICE: totalAmount, // Total value
+        NOTES:'',            MOBILENUMBER: '',
+        Status: "",
         },
         {
-            TransactionId: '', // Leave TransactionId empty
-            VehicleNo: '',
-            OperationDate: '',
-            VehicleType: 'Total Amount', // Label for total amount
-            Price: totalAmount, // Total value
-            CustomerName: '',
-            MobileNo: ''
+            NO: '',
+            DATE: '',
+            "AGENT NAME": '',
+            "VEHICLE NUMBER": '',
+            "VEHICLE TYPE": 'Paid Amount', // Label
+            PRICE: paidAmount, // Paid value
+            NOTES:'',  
+            MOBILENUMBER: '',
+            Status: "",
         },
         {
-            TransactionId: '', // Leave TransactionId empty
-            VehicleNo: '',
-            OperationDate: '',
-            VehicleType: 'Paid Amount', // Label for paid amount
-            Price: paidAmount, // Paid value
-            CustomerName: '',
-            MobileNo: ''
-        },
-        {
-            TransactionId: '', // Leave TransactionId empty
-            VehicleNo: '',
-            OperationDate: '',
-            VehicleType: 'Unpaid Amount', // Label for unpaid amount
-            Price: unpaidAmount, // Unpaid value
-            CustomerName: '',
-            MobileNo: ''
+            NO: '',
+            DATE: '',
+            "AGENT NAME": '',
+            "VEHICLE NUMBER": '',
+            "VEHICLE TYPE": 'Unpaid Amount', // Label
+            PRICE: unpaidAmount, // Unpaid value
+            NOTES:'',  
+            MOBILENUMBER: '',
+            Status: "",
         }
     );
 
     // Generate Excel sheet
     const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.json_to_sheet(formattedData, { skipHeader: false });
+    const ws = XLSX.utils.json_to_sheet(formattedData);
     XLSX.utils.book_append_sheet(wb, ws, 'Transaction Report');
     XLSX.writeFile(wb, 'transaction_report.xlsx');
 };
+
 
 
 
@@ -149,6 +149,7 @@ function Report() {
                                     <th>Customer Name</th>
                                     <th>Vehicle Type</th>
                                     <th>Vehicle No</th>
+                                    <th>Notes</th>
                                     <th>Operation Date</th>
                                 </tr>
                             </thead>
@@ -160,6 +161,7 @@ function Report() {
 
                                             <td>{entry.VehicleType}</td>
                                             <td>{entry.VehicleNo}</td>
+                                            <td>{entry.Notes}</td>
                                             <td>{new Date(entry.OperationDate).toLocaleDateString()}</td>
 
                                         </tr>

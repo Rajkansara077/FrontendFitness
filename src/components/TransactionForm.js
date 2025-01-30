@@ -5,7 +5,7 @@ import './TransactionForm.css';
 
 function TransactionForm() {
     const [customers, setCustomers] = useState([]);
-    const [formData, setFormData] = useState({ CustomerId: '', VehicleNo: '', OperationDate: '',Price: '',VehicleType:'' });
+    const [formData, setFormData] = useState({ CustomerId: '',Notes: '', VehicleNo: '', OperationDate: '',Price: '',VehicleType:'' });
     const navigate = useNavigate();
   
    
@@ -23,7 +23,7 @@ function TransactionForm() {
             await axios.post('http://localhost:5000/transactions', formData);
             alert('Transaction added successfully!');
             navigate('/transactionlist')
-            setFormData({ CustomerId: '', VehicleNo: '', OperationDate: '',Price: '',VehicleType:'' }); // Reset form
+            setFormData({ CustomerId: '',Notes: '', VehicleNo: '', OperationDate: '',Price: '',VehicleType:'' }); // Reset form
         } catch (error) {
             console.error(error);
             alert('Failed to add transaction.');
@@ -85,6 +85,15 @@ function TransactionForm() {
                                     placeholder="Enter VehicleType"
                                     value={formData.VehicleType}
                                     onChange={(e) => setFormData({ ...formData, VehicleType: e.target.value })}
+                                    required />
+                                    <label htmlFor="VehicleType">Notes</label>
+                                <input
+                                  className="input-field"
+                                    type="text"
+                                    id="Notes"
+                                    placeholder="Enter Notes"
+                                    value={formData.Notes}
+                                    onChange={(e) => setFormData({ ...formData, Notes: e.target.value })}
                                     required />
                           
                           

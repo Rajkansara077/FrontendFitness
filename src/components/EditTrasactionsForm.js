@@ -12,6 +12,7 @@ function EdittransactionForm() {
         OperationDate: '',
         Price: '',
         VehicleType: '',
+        Notes: '',
     });
     const navigate = useNavigate();
     const location = useLocation(); 
@@ -38,6 +39,7 @@ function EdittransactionForm() {
              VehicleNo: location.state.VehicleNo,
              Price: location.state.Price,
              VehicleType: location.state.VehicleType,
+             Notes: location.state.Notes,
              OperationDate: new Date(location.state.OperationDate).toISOString().split('T')[0] 
                 });
             } 
@@ -54,7 +56,8 @@ function EdittransactionForm() {
                 CustomerId: '',
                 VehicleNo: '',
                 Price: '',     
-                VehicleType: '' ,      OperationDate: ''
+                VehicleType: '' , 
+                Notes: '',     OperationDate: ''
             }); // Reset form data
             navigate(`/transactionlist`)
         } catch (error) {
@@ -117,6 +120,15 @@ function EdittransactionForm() {
                                             id="VehicleType"
                                             value={formData.VehicleType}
                                             onChange={(e) => setFormData({ ...formData, VehicleType: e.target.value })}
+                                            required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="Notes">Notes:</label>
+                                        <input
+                                            type="text"
+                                            id="Notes"
+                                            value={formData.Notes}
+                                            onChange={(e) => setFormData({ ...formData, Notes: e.target.value })}
                                             required />
                                     </div>
                                     <div className="form-group">
