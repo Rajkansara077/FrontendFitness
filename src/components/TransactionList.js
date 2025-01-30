@@ -83,7 +83,7 @@ const handleDeleteTransaction = useCallback((id) => {
         });
 }, [fetchTransaction]);
 
-const exportToExceltransactions = (transactionId,index) => {
+const exportToExceltransactions = (transactionId) => {
     const transaction = transactions.find((t) => t.TransactionId === transactionId);
     if (!transaction) {
         alert("Transaction not found.");
@@ -92,15 +92,13 @@ const exportToExceltransactions = (transactionId,index) => {
 
     const formattedData = [
         {
-         NO: index + 1, // Auto-increment ID
-        DATE: new Date(transaction.OperationDate).toLocaleDateString(),  "AGENT NAME": transaction.Customer?.CustomerName || '', 
-        "VEHICLE NUMBER": transaction.VehicleNo,
-        "VEHICLE TYPE": transaction.VehicleType || 'N/A',
-        PRICE: transaction.Price,
-        NOTES: transaction.Notes,
-        // Flatten CustomerName
-        MOBILENUMBER: transaction.Customer?.MobileNo || '',
-            Status: transaction.IsPaid ? "Paid" : "Unpaid",  // Flatten CustomerName
+            TransactionId: transaction.TransactionId,
+            VehicleNo: transaction.VehicleNo,
+            OperationDate: new Date(transaction.OperationDate).toLocaleDateString(), // Format date
+            VehicleType: transaction.VehicleType || 'N/A',
+            Price: transaction.Price,
+            Notes: transaction.Notes,
+            CustomerName: transaction.Customer?.CustomerName || '', // Flatten CustomerName
         },
     ];
 
@@ -118,40 +116,36 @@ const exportToExceltransactions = (transactionId,index) => {
             "AGENT NAME": '',
             "VEHICLE NUMBER": '',
             "VEHICLE TYPE": 'Total Amount', // Label
-            PRICE: "", // Leave price blank for summary header
-          NOTES:'',            MOBILENUMBER: '',
-          Status: "",
-
+            Price: "", // Leave price blank for summary header
+            CustomerName: "",
+            Notes: "",
         },
         {
-            NO: '',
-            DATE: '',
-            "AGENT NAME": '',
-            "VEHICLE NUMBER": '',
-            "VEHICLE TYPE": 'Total Amount', // Label for total amount
-            PRICE: `₹${totalPrice}`, // Total value
-            NOTES:'',            MOBILENUMBER: '',
-          Status: "",
+            TransactionId: "", // Leave TransactionId empty
+            VehicleNo: "",
+            OperationDate: "",
+            VehicleType: "Total Amount", // Label for total amount
+            Price: `₹${totalPrice}`, // Total value
+            CustomerName: "",
+            Notes: "",
         },
         {
-            NO: '',
-            DATE: '',
-            "AGENT NAME": '',
-            "VEHICLE NUMBER": '',
-            "VEHICLE TYPE": 'Paid Amount', // Label for paid amount
-            PRICE: `₹${paidAmount}`, // Paid value
-            NOTES:'',            MOBILENUMBER: '',
-          Status: "",
+            TransactionId: "", // Leave TransactionId empty
+            VehicleNo: "",
+            OperationDate: "",
+            VehicleType: "Paid Amount", // Label for paid amount
+            Price: `₹${paidAmount}`, // Paid value
+            CustomerName: "",
+            Notes: "",
         },
         {
-            NO: '',
-            DATE: '',
-            "AGENT NAME": '',
-            "VEHICLE NUMBER": '',
-            "VEHICLE TYPE": 'Unpaid Amount', // Label for unpaid amount
-            PRICE: `₹${unpaidAmount}`, // Unpaid value
-            NOTES:'',            MOBILENUMBER: '',
-          Status: "",
+            TransactionId: "", // Leave TransactionId empty
+            VehicleNo: "",
+            OperationDate: "",
+            VehicleType: "Unpaid Amount", // Label for unpaid amount
+            Price: `₹${unpaidAmount}`, // Unpaid value
+            CustomerName: "",
+            Notes: "",
         }
     );
 
