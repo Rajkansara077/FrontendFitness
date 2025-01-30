@@ -8,6 +8,7 @@ function TransactionList() {
     const [transactions, setTransactions] = useState([]);
     const [customers, setCustomers] = useState([]);
     const fileInputRef = useRef(null);
+    const [searchQuery, setSearchQuery] = useState("");
     const [formData, setFormData] = useState({
         TransactionId: '',
         CustomerId: '',
@@ -241,9 +242,17 @@ const handleMarkAsPaid = async (transactionId, customerId) => {
         alert('Failed to mark transaction as paid');
     }
 };
+const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+};
 
 
-
+const filteredTransactions = transactions.filter((customer) =>
+    customer.CustomerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    customer.Transactions.some((transaction) =>
+        transaction.VehicleType?.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+);
 
 
     return (
@@ -275,7 +284,15 @@ const handleMarkAsPaid = async (transactionId, customerId) => {
     </button>
   </div>
 </div>
-
+   <div className="search-container">
+            <input
+                type="text"
+                placeholder="Search by Customer Name or Vehicle Type..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="search-input"
+            />
+            </div>
 
 
 
@@ -287,7 +304,7 @@ const handleMarkAsPaid = async (transactionId, customerId) => {
     </thead>
     <tbody>
     <div className="customers-container">
-    {transactions.map((customer) => (
+    {filteredTransactions.map((customer) => (
     <div key={customer.CustomerId} className="customer-card">
         <h3 className="customer-name">{customer.CustomerName}</h3>
         <p className="customer-total">

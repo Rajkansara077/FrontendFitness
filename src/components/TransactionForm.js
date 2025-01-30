@@ -7,7 +7,7 @@ function TransactionForm() {
     const [customers, setCustomers] = useState([]);
     const [formData, setFormData] = useState({ CustomerId: '', VehicleNo: '', OperationDate: '',Price: '',VehicleType:'' });
     const navigate = useNavigate();
-    
+  
    
     useEffect(() => {
         axios
