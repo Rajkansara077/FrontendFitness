@@ -72,23 +72,23 @@ const exportCustomerToExcel = (customer) => {
     XLSX.writeFile(wb, `${sanitizedFileName}.xlsx`);
 };
 
-    return (
-        <><div>
-        
-        <div className="main-content">
-        <main >
-            <div className="table-container">
-                <h2 className="title">Customers</h2>
-                
-                {/* <Link to="/add-customer">
-                    <button className="dashboard-button">Add Customer</button>
-                </Link> */}
-                <div className="dashboard-button-container">
-                    <Link to="/add-customer">
-        <button className="mark-paid-button">Add Customer</button>
-    </Link>
-</div>
-                <table className="dashboard-table">
+// Import your CSS file
+
+// ... (Your existing component logic and data fetching)
+
+return (
+    <div className="customer-list-container"> {/* Main container */}
+        <div className="customer-list-content"> {/* Content area */}
+            <h2 className="customer-list-title">Customers</h2> {/* Title */}
+
+            <div className="customer-list-actions"> {/* Container for buttons */}
+                <Link to="/add-customer">
+                    <button className="customer-list-add-button">Add Customer</button>
+                </Link>
+            </div>
+
+            <div className="table-responsive"> {/* For table responsiveness */}
+                <table className="customer-list-table">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -99,20 +99,27 @@ const exportCustomerToExcel = (customer) => {
                     </thead>
                     <tbody>
                         {customers.length > 0 ? (
-                            customers.map((customer,index) => (
+                            customers.map((customer, index) => (
                                 <tr key={customer.CustomerId}>
-                                    <td>{index+1}</td>
+                                    <td>{index + 1}</td>
                                     <td>{customer.CustomerName}</td>
                                     <td>{customer.MobileNo}</td>
                                     <td>
-                                        <button onClick={() => handleEdit(customer)}>Edit</button>
-                                        <button onClick={() => handleDeleteCustomer(customer.CustomerId)}>Delete</button>
+                                        <button className="customer-list-edit-button" onClick={() => handleEdit(customer)}>
+                                            Edit
+                                        </button>
                                         <button
-                                                    className="export-button"
-                                                    onClick={() => exportCustomerToExcel(customer)}
-                                                >
-                                                    Export to Excel
-                                                </button>
+                                            className="customer-list-delete-button"
+                                            onClick={() => handleDeleteCustomer(customer.CustomerId)}
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            className="customer-list-export-button"
+                                            onClick={() => exportCustomerToExcel(customer)}
+                                        >
+                                            Export to Excel
+                                        </button>
                                     </td>
                                 </tr>
                             ))
@@ -124,10 +131,9 @@ const exportCustomerToExcel = (customer) => {
                     </tbody>
                 </table>
             </div>
-        </main></div>
+        </div>
     </div>
-</>    
-    );
+);
 }
 
 export default CustomerList;

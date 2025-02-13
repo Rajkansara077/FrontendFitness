@@ -13,7 +13,14 @@ function Dashboard() {
   const [currentMonthTransactions, setCurrentMonthTransactions] = useState(0);
   const [overallAmount, setOverallAmount] = useState(0);
   const [customerTransactions, setCustomerTransactions] = useState([]);
-  const [customertotal, setCustomertotal] = useState(0);
+  // const [customertotal, setCustomertotal] = useState(0);
+  const [customertotal, setCustomertotal] = useState({
+    CustomerName: '',
+    TotalAmount: 0,
+    PaidAmount: 0,
+    UnpaidAmount: 0
+  });
+  
   const [customerVehicleTypes, setCustomerVehicleTypes] = useState([]);
   const getMonthName = (monthIndex) => {
     const monthNames = [
@@ -84,83 +91,88 @@ function Dashboard() {
 // Handle customer selection change
 const handleCustomerSelect = (e) => {
   const customerId = e.target.value;
-
   setFormData({ ...formData, CustomerId: customerId });
-console.log('this is customerId',customerId);
-  if (customerId  && customerId !== "null") {
-    // Filter transactions for the selected customer
-    const customerFilteredTransactions = transactionsfilter.find(item => item.CustomerId === parseInt(customerId));
-    if (customerFilteredTransactions) {
-      const { Transactions } = customerFilteredTransactions;
 
-  
+  console.log('Selected Customer ID:', customerId);
+
+  if (customerId && customerId !== "null") {
+    // Find the selected customer's transactions
+    const customerFilteredTransactions = transactionsfilter.find(item => item.CustomerId === parseInt(customerId));
+
+    if (customerFilteredTransactions) {
+      const { Transactions, TotalAmount, PaidAmount, UnpaidAmount, CustomerName } = customerFilteredTransactions;
 
       const vehicleTypes = Transactions.reduce((acc, transaction) => {
-        const vehicleType = transaction.VehicleType;
-        if (!acc.includes(vehicleType)) {
-          acc.push(vehicleType);
+        if (!acc.includes(transaction.VehicleType)) {
+          acc.push(transaction.VehicleType);
         }
         return acc;
       }, []);
-setCustomertotal(customerFilteredTransactions);
+
+      // Ensure all required fields are set
+      setCustomertotal({
+        CustomerName: CustomerName || 'Unknown',
+        TotalAmount: TotalAmount || 0,
+        PaidAmount: PaidAmount || 0,
+        UnpaidAmount: UnpaidAmount || 0
+      });
+
       setCustomerTransactions(Transactions);
- 
       setCustomerVehicleTypes(vehicleTypes);
+    } else {
+      setCustomertotal({ CustomerName: '', TotalAmount: 0, PaidAmount: 0, UnpaidAmount: 0 });
+      setCustomerTransactions([]);
+      setCustomerVehicleTypes([]);
     }
   } else {
-    // Reset when 'null' is selected
+    setCustomertotal({ CustomerName: '', TotalAmount: 0, PaidAmount: 0, UnpaidAmount: 0 });
     setCustomerTransactions([]);
-setCustomertotal(0);
     setCustomerVehicleTypes([]);
   }
 };
-  return (
-    <div>
-      <div className="main-content">
-        <main>
-          <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-header">
-                <span className="stat-time">Customers</span>
-              </div>
-              <div className="stat-body">
-                <p className="stat-value">{count.totalCustomers || 0}</p>
-              </div>
-            </div>
 
-            <div className="stat-card">
-              <div className="stat-header">
-                <span className="stat-time">Cars</span>
-              </div>
-              <div className="stat-body">
-                <p className="stat-value">{count.totalCars || 0}</p>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-header">
-                <span className="stat-time">{getMonthName(new Date().getMonth())} Transactions</span>
-              </div>
-              <div className="stat-body">
-                <p className="stat-value">₹{currentMonthTransactions.toLocaleString()}</p>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-header">
-                <span className="stat-time">Overall Amount</span>
-              </div>
-              <div className="stat-body">
-                <p className="stat-value">₹{overallAmount.toLocaleString()}</p>
-              </div>
-            </div>
+return (
+  <div className="dashboard-container"> {/* Main container */}
+    <div className="dashboard-content"> {/* Content area */}
+      <div className="stats-grid">
+        <div className="stat-card">
+          <div className="stat-icon"><i className="fas fa-users"></i></div> {/* Icon */}
+          <div className="stat-info">
+            <span className="stat-label">Customers</span>
+            <p className="stat-value">{count.totalCustomers || 0}</p>
           </div>
-          <div className="title">
-          <label htmlFor="CustomerId">Select Customer</label>
+        </div>
+        <div className="stat-card">
+          <div className="stat-icon"><i className="fas fa-car"></i></div> {/* Icon */}
+          <div className="stat-info">
+            <span className="stat-label">Cars</span>
+            <p className="stat-value">{count.totalCars || 0}</p>
+          </div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-icon"><i className="fas fa-money-bill-wave"></i></div> {/* Icon */}
+          <div className="stat-info">
+            <span className="stat-label">{getMonthName(new Date().getMonth())} Transactions</span>
+            <p className="stat-value">₹{currentMonthTransactions.toLocaleString()}</p>
+          </div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-icon"><i className="fas fa-chart-line"></i></div> {/* Icon */}
+          <div className="stat-info">
+            <span className="stat-label">Overall Amount</span>
+            <p className="stat-value">₹{overallAmount.toLocaleString()}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="customer-section"> {/* Customer section */}
+        <div className="customer-select"> {/* Select styles */}
+          <label htmlFor="CustomerId">Select Customer:</label>
           <select
             id="CustomerId"
             value={formData.CustomerId}
             onChange={handleCustomerSelect}
+            className="customer-dropdown" // Dropdown styles
             required
           >
             <option value="">Select Customer</option>
@@ -171,28 +183,26 @@ setCustomertotal(0);
               </option>
             ))}
           </select>
-          </div>
-          {(formData.CustomerId && formData.CustomerId !== "None") && (
+        </div>
+
+        {formData.CustomerId && formData.CustomerId !== "None" && customertotal.CustomerName && (
   <div className="customer-summary">
     <h3>Customer Summary</h3>
     <div className="summary-card">
-    <p><strong>Customer Name:</strong> {customertotal.CustomerName.toLocaleString()}</p>
-      <p><strong>Total Amount:</strong> ₹{customertotal.TotalAmount.toLocaleString()}</p>
-      <p><strong>Total Paid:</strong> ₹{customertotal.PaidAmount.toLocaleString()}</p>
-      <p><strong>Total Unpaid:</strong> ₹{customertotal.UnpaidAmount.toLocaleString()}</p>
-      <p><strong>All Vehicle Types:</strong> {customerVehicleTypes.join(', ')}</p>
+      <p><strong>Customer Name:</strong> {customertotal.CustomerName || 'N/A'}</p>
+      <p><strong>Total Amount:</strong> ₹{customertotal.TotalAmount || 0}</p>
+      <p><strong>Total Paid:</strong> ₹{customertotal.PaidAmount || 0}</p>
+      <p><strong>Total Unpaid:</strong> ₹{customertotal.UnpaidAmount || 0}</p>
+      <p><strong>All Vehicle Types:</strong> {customerVehicleTypes.length > 0 ? customerVehicleTypes.join(', ') : 'N/A'}</p>
       <p><strong>Total Transactions (Current Month):</strong> {customerTransactions.length}</p>
-      {/* <p><strong>Total Transactions (Overall):</strong> {customerOverallTransactions.length}</p> */}
-      {/* <p><strong>Overall Amount (Current Month):</strong> ₹{currentMonthTransactions.toLocaleString()}</p>
-      <p><strong>Overall Amount (All Time):</strong> ₹{overallAmount.toLocaleString()}</p> */}
     </div>
   </div>
 )}
-    
-        </main>
+
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default Dashboard;

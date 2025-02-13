@@ -37,33 +37,33 @@ console.log('this is customers',customerId);
     }, [customerId,navigate,formData]); 
 
     return (
-        <><div className="main-content">
-            
-                <main className="dashboard-content">
-                <h2 className="text-white text-center text-2xl font-bold mb-4">Edit Customer</h2>
+        <div className="customer-form-container">
+            <div className="customer-form-content">
+                <h2 className="customer-form-title">Edit Customer</h2>
                 <form onSubmit={handleSubmit} className="customer-form">
-              <label htmlFor="CustomerName">Customer Name</label>
-              <input
-                className="input-field"
-                type="text"
-                placeholder="Enter customer name"
-                                value={formData.CustomerName}
-                                onChange={(e) => setFormData({ ...formData, CustomerName: e.target.value })}
-              />
-              <label htmlFor="MobileNo">Mobile Number</label>
-              <input
-                className="input-field"
-                type="text"
-                id="MobileNo"
-                                placeholder="Enter mobile number"
-                                value={formData.MobileNo}
-                                onChange={(e) => setFormData({ ...formData, MobileNo: e.target.value })}
-              />
-              <button className="btn" type="submit" >Submit</button>
-              </form>
-            
-        </main></div>
-       </>
+                    <label htmlFor="CustomerName">Customer Name</label>
+                    <input
+                        className="customer-form-input"
+                        type="text"
+                        placeholder="Enter customer name"
+                        value={formData.CustomerName}
+                        onChange={(e) => setFormData({ ...formData, CustomerName: e.target.value })}
+                        required
+                    />
+                    <label htmlFor="MobileNo">Mobile Number</label>
+                    <input
+                        className="customer-form-input"
+                        type="text"
+                        id="MobileNo"
+                        placeholder="Enter mobile number"
+                        value={formData.MobileNo}
+                        onChange={(e) => setFormData({ ...formData, MobileNo: e.target.value })}
+                        required
+                    />
+                    <button className="customer-form-button" type="submit">Update</button> {/* Change button text */}
+                </form>
+            </div>
+        </div>
     );
 }
 

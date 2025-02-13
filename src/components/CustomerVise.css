@@ -1,0 +1,290 @@
+/* Main Content Container */
+.main-content {
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom right, #e0f2f7, #bbdefb); /* Light blue gradient background */
+    background-size: cover; /* Cover the entire background */
+    animation: gradientShift 10s ease infinite; /* Gradient animation */
+}
+
+/* Main Section */
+main {
+    flex-grow: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.mark-paid-button,
+.export-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.mark-paid-button:hover,
+.export-button:hover {
+    background-color: #0056b3;
+}
+.Edit-paid-button,
+.export-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    margin: 0 10px 5px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.Edit-paid-button:hover,
+.export-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Search Input */
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* Customers Container Grid */
+.custom-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: linear-gradient(to right, #1e3c72, #2a5298); /* Blue gradient */
+    min-height: 100vh;
+  }
+  
+  .custom-card {
+    width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+/* Hover effect for cards */
+.customer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Customer Card Text */
+.customer-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333; /* Ensure good contrast */
+}
+
+.customer-total {
+    margin-bottom: 5px;
+}
+
+.total-amount,
+.paid-amount,
+.unpaid-amount {
+    font-weight: bold;
+    font-size: 1.1rem; /* Increased font size for better readability */
+}
+
+.total-amount {
+    color: #333;
+}
+
+.paid-amount {
+    color: green;
+}
+
+.unpaid-amount {
+    color: red;
+}
+
+/* Export Button inside Card */
+.customer-card button.export-button {
+    margin-top: 10px; /* Adds some space between content and button */
+    width: 100%; /* Makes the button take full width of the card */
+}
+
+/* Card Padding/Spacing Adjustments */
+.customer-card p {
+    margin-bottom: 8px; /* Provide some breathing room between paragraphs */
+}
+
+/* Border separation between cards */
+.customer-card:not(:last-child) {
+    border-bottom: 2px solid #ddd;
+}
+
+/* Transactions Table */
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.transactions-table th,
+.transactions-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.transactions-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.status-paid {
+    /* Add any common styles here */
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 600px; /* Adjust as needed */
+    width: 90%; /* Occupy most of the screen on smaller devices */
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #888;
+}
+
+/* Modal Body */
+.modal-body {
+    margin-bottom: 20px;
+}
+
+/* Modal Footer */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 10px;
+}
+
+/* Save and Cancel Buttons */
+.save-btn,
+.cancel-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.save-btn {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #218838; /* Darker green */
+}
+
+.cancel-btn {
+    background-color: #dc3545; /* Red */
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #c12a36; /* Darker red */
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea { /* Added textarea */
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}

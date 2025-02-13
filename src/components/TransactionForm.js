@@ -31,93 +31,85 @@ function TransactionForm() {
     };
 
     return (
-        <><div className="main-content">
-            
-                <main >
-        
-            
-            {/* <div className="card"> */}
-            <form onSubmit={handleSubmit} className="customer-form">
-              <h2 className="title"> Add New Transaction</h2>
-            
-               <label htmlFor="CustomerId" >Select Customer</label>
-                                <select
-                                    id="CustomerId"
-                                    value={formData.CustomerId}
-                                    onChange={(e) => setFormData({ ...formData, CustomerId: e.target.value })}
-                                    required
-                                >
-                                    <option value="">Select Customer</option>
-                                    {customers.map((customer) => (
-                                        <option key={customer.CustomerId} value={customer.CustomerId}>
-                                            {customer.CustomerName}
-                                        </option>
-                                    ))}
-                                </select>
-                            
-                                <label htmlFor="VehicleNo">Vehicle Number</label>
-                                <input
-                                className="input-field"
-                                    type="text"
-                                    id="VehicleNo"
-                                    placeholder="Enter vehicle number"
-                                    value={formData.VehicleNo}
-                                    onChange={(e) => setFormData({ ...formData, VehicleNo: e.target.value })}
-                                    required />
-                            
-          
-                                <label htmlFor="Price">Price</label>
-                                <input
-                                  className="input-field"
-                                    type="text"
-                                    id="Price"
-                                    placeholder="Enter Price"
-                                    value={formData.Price}
-                                    onChange={(e) => setFormData({ ...formData, Price: e.target.value })}
-                                    required />
-                 
-                           
-                                <label htmlFor="VehicleType">VehicleType</label>
-                                <input
-                                  className="input-field"
-                                    type="text"
-                                    id="VehicleType"
-                                    placeholder="Enter VehicleType"
-                                    value={formData.VehicleType}
-                                    onChange={(e) => setFormData({ ...formData, VehicleType: e.target.value })}
-                                    required />
-                                    <label htmlFor="VehicleType">Notes</label>
-                                <input
-                                  className="input-field"
-                                    type="text"
-                                    id="Notes"
-                                    placeholder="Enter Notes"
-                                    value={formData.Notes}
-                                    onChange={(e) => setFormData({ ...formData, Notes: e.target.value })}
-                                    required />
-                          
-                          
-                          <label htmlFor="OperationDate">Operation Date</label>
-<input
-    type="date"
-    className="input-field"
-    id="OperationDate"
-    value={formData.OperationDate}
-    onClick={(e) => e.target.showPicker()} // This forces the date picker to open when clicked
-    onChange={(e) => setFormData({ ...formData, OperationDate: e.target.value })}
-    required />
+        <div className="transaction-form-container">
+            <div className="transaction-form-content">
+                <h2 className="transaction-form-title">Add New Transaction</h2>
+                <form onSubmit={handleSubmit} className="transaction-form">
+                    <label htmlFor="CustomerId">Select Customer</label>
+                    <select
+                        id="CustomerId"
+                        className="transaction-form-select" // Style the select element
+                        value={formData.CustomerId}
+                        onChange={(e) => setFormData({ ...formData, CustomerId: e.target.value })}
+                        required
+                    >
+                        <option value="">Select Customer</option>
+                        {customers.map((customer) => (
+                            <option key={customer.CustomerId} value={customer.CustomerId}>
+                                {customer.CustomerName}
+                            </option>
+                        ))}
+                    </select>
 
-                        
-              <button className="btn" type="submit" >Submit</button>
-            {/* </div> */}
-            </form>
-           
-      
-          
-          </main>
-                </div>
-               </>
-        
+                    <label htmlFor="VehicleNo">Vehicle Number</label>
+                    <input
+                        className="transaction-form-input"
+                        type="text"
+                        id="VehicleNo"
+                        placeholder="Enter vehicle number"
+                        value={formData.VehicleNo}
+                        onChange={(e) => setFormData({ ...formData, VehicleNo: e.target.value })}
+                        required
+                    />
+
+                    <label htmlFor="Price">Price</label>
+                    <input
+                        className="transaction-form-input"
+                        type="number" // Use type="number" for price
+                        id="Price"
+                        placeholder="Enter Price"
+                        value={formData.Price}
+                        onChange={(e) => setFormData({ ...formData, Price: e.target.value })}
+                        required
+                    />
+
+                    <label htmlFor="VehicleType">Vehicle Type</label>
+                    <input
+                        className="transaction-form-input"
+                        type="text"
+                        id="VehicleType"
+                        placeholder="Enter Vehicle Type"
+                        value={formData.VehicleType}
+                        onChange={(e) => setFormData({ ...formData, VehicleType: e.target.value })}
+                        required
+                    />
+
+                    <label htmlFor="Notes">Notes</label>
+                    <input
+                        className="transaction-form-input"
+                        type="text"
+                        id="Notes"
+                        placeholder="Enter Notes"
+                        value={formData.Notes}
+                        onChange={(e) => setFormData({ ...formData, Notes: e.target.value })}
+                        required
+                    />
+
+                    <label htmlFor="OperationDate">Operation Date</label>
+                    <input
+                        type="date"
+                        className="transaction-form-input"
+                        id="OperationDate"
+                        value={formData.OperationDate}
+                        onClick={(e) => e.target.showPicker()}
+                        onChange={(e) => setFormData({ ...formData, OperationDate: e.target.value })}
+                        required
+                    />
+
+                    <button className="transaction-form-button" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
     );
 }
 

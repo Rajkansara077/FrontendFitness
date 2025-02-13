@@ -1,158 +1,117 @@
-/* Report container styling */
-.report-container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #a2b9bc;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
+/* TransactionReport.css */
+
+.main-content {
+    padding: 20px; /* Add some padding around the content */
+    background-color: #f4f4f4; /* Light background color */
+    min-height: 100vh; /* Ensure full viewport height */
+    display: flex;
+    flex-direction: column; /* Align content vertically */
 }
 
-/* Heading */
-.report-container h2 {
-    text-align: center;
+main {
+    flex-grow: 1; /* Allow main to take up available space */
+    max-width: 1200px; /* Set a maximum width for the content */
+    margin: 0 auto; /* Center the content horizontally */
+    background-color: white; /* White background for the report area */
+    padding: 30px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
     margin-bottom: 20px;
-    color: #333;
+    text-align: center;
+    color: #333; /* Darker heading color */
 }
 
-/* Filters section */
 .filters {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-wrap: wrap; /* Allow filters to wrap */
+    gap: 10px; /* Spacing between filter elements */
     margin-bottom: 20px;
+    justify-content: center; /* Center the filter elements */
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 calc(33% - 20px); /* Adjust to fit three fields in a row */
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Space between form groups */
 }
 
 .form-group label {
-    font-weight: bold;
+    display: block;
     margin-bottom: 5px;
+    font-weight: bold;
     color: #555;
 }
 
-.form-group input {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
+.form-group input,
+.form-group select {
+    padding: 8px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    transition: border-color 0.3s;
+    box-sizing: border-box;
+    font-size: 1rem;
 }
 
-.form-group input:focus {
-    border-color: #f8f8f8;
-    outline: none;
-}
-
-/* Generate button */
-.generate-button {
-    padding: 10px 20px;
-    background-color: #a2b9bc;
-    color: black;
+.generate-button,
+.export-button {
+    background-color: #007bff; /* Blue button */
+    color: white;
+    padding: 10px 15px;
     border: none;
     border-radius: 5px;
-    font-size: 1rem;
     cursor: pointer;
-    margin-top: auto; /* Align with inputs */
-    height: 42px;
-    align-self: center;
-    transition: background-color 0.3s;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-left: 10px; /* Space between buttons */
 }
 
-.generate-button:hover {
-    background-color: #a2b9bc;
+.generate-button:hover,
+.export-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
-/* Table styling */
-.report-table {
+.dashboard-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background-color: white;
 }
 
-.report-table thead {
-    background-color: #a2b9bc;
-    color: white;
-}
-
-.report-table th,
-.report-table td {
-    padding: 10px;
+.dashboard-table th,
+.dashboard-table td {
+    padding: 12px 15px;
     text-align: left;
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
-.report-table tr:nth-child(even) {
-    background-color: #f4f4f4;
+.dashboard-table th {
+    background-color: #f0f0f0; /* Light gray header background */
+    font-weight: bold;
 }
 
 .no-data {
     text-align: center;
-    font-style: italic;
-    color: #777;
-}
-/* Edit Form Styles */
-.edit-form {
-    margin-top: 20px;
     padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    font-style: italic;
+    color: #888;
 }
 
-.edit-form h3 {
-    text-align: center;
-    margin-bottom: 20px;
-}
+/* Responsive adjustments (example) */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column; /* Stack filters vertically on smaller screens */
+        align-items: center; /* Center the filters horizontally */
+    }
 
-.edit-form .form-group {
-    margin-bottom: 15px;
-}
+    .form-group {
+        width: 100%; /* Make form groups take full width */
+    }
 
-.edit-form label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.edit-form input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.edit-form button {
-    padding: 10px 15px;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.edit-form button:hover {
-    background-color: #45a049;
-}
-
-.edit-form button[type="button"] {
-    background-color: #f44336;
-}
-
-.edit-form button[type="button"]:hover {
-    background-color: #e53935;
+    .generate-button,
+    .export-button {
+        margin-left: 0; /* Remove left margin */
+        margin-top: 10px; /* Add top margin for stacked buttons */
+        width: 100%; /* Buttons take full width */
+    }
 }

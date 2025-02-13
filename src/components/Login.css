@@ -1,81 +1,94 @@
-/* General container styles */
-.min-h-screen {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 3rem 1.5rem;
+/* Login.css */
+
+/* Login.css */
+
+.login-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  min-height: 100vh; /* Full viewport height */
+  background-color: #f4f4f4; /* Light background - consistent with dashboard */
+  padding: 20px; /* Consistent padding */
+  background-image: url('../assests/pexels-avinashpatel-544542.jpg'); /* Add your background image path here */
+  background-size: cover; /* Ensure the background covers the whole container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent image repetition */
+}
+
+/* The rest of your existing CSS remains unchanged */
+.login-content {
+  background-color: rgba(255, 255, 255, 0.9); /* White background with slight transparency for contrast */
+  border-radius: 8px; /* Rounded corners */
+  padding: 30px; /* Padding inside content area */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  max-width: 400px; /* Limit width for larger screens */
+  width: 90%; /* Responsive width */
+}
+
+/* The rest of the CSS remains the same */
+
+
+.login-header {
+  text-align: center; /* Center logo/title */
+  margin-bottom: 20px; /* Space below header */
+}
+
+.login-title {
+  font-size: 1.8rem; /* Consistent title size */
+  font-weight: bold;
+  color: #333; /* Darker title color */
+  margin: 0;
+}
+
+.login-card-container {
+  /* Styles for card container */
+}
+
+.login-card {
+  /* Common card styles */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding inside card */
+  margin-bottom: 20px; /* Space between cards */
+}
+
+.login-card-title {
+  font-size: 1.5rem; /* Consistent card title size */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.login-input {
+  width: calc(100% - 22px); /* Full width minus padding/border */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Include padding/border in width */
+  font-size: 1rem;
+}
+
+.login-button {
+  background-color: #007bff; /* Blue button */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%; /* Full width button */
+  font-size: 1rem;
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.login-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+/* Responsive adjustments if needed */
+@media (max-width: 500px) {
+  .login-content {
+      padding: 20px;
   }
-  
-  .bg-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
-                      url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&q=80');
-    background-size: cover;
-    background-position: center;
-  }
-  
-  /* Card styles */
-  .card {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    padding: 2rem 1.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid #2d2d2d;
-    max-width: 400px;
-    margin: 0 auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Text styles */
-  .text-white {
-    color: white;
-  }
-  
-  .text-gray {
-    color: #d1d5db;
-  }
-  
-  /* Input styles */
-  .input-field {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid #4b5563;
-    border-radius: 0.375rem;
-    background-color: rgba(31, 41, 55, 0.5);
-    color: white;
-    placeholder-color: #9ca3af;
-    outline: none;
-    margin-bottom: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  
-  .input-field:focus {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.4);
-  }
-  
-  /* Button styles */
-  .btn {
-    display: inline-block;
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 0.375rem;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .btn:hover {
-    background-color: #dc2626;
-  }
-  
-  .btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.4);
-  }
-  
+}

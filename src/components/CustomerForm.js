@@ -21,42 +21,35 @@ function CustomerForm() {
     };
 
     return (
-        <><div className="main-content">
-           
-          <main >
-        
-            
-            {/* <div className="card"> */}
-            <form onSubmit={handleSubmit} className="customer-form">
-              <h2 className="text-white text-center text-2xl font-bold mb-4">Add Customer</h2>
-              <label htmlFor="CustomerName" >Customer Name</label>
-              <input
-                className="input-field"
-                type="text"
-                placeholder="Enter customer name"
-                                value={formData.CustomerName}
-                                onChange={(e) => setFormData({ ...formData, CustomerName: e.target.value })}
-              />
-              <label htmlFor="MobileNo">Mobile Number</label>
-              <input
-                className="input-field"
-                type="text"
-                id="MobileNo"
-                                placeholder="Enter mobile number"
-                                value={formData.MobileNo}
-                                onChange={(e) => setFormData({ ...formData, MobileNo: e.target.value })}
-              />
-              <button className="btn" type="submit" >Submit</button>
-            {/* </div> */}
-            </form>
-           
-      
-          
-          </main>
-        </div>
-        </>
+      <div className="customer-form-container"> {/* Main container */}
+          <div className="customer-form-content"> {/* Content area */}
+              <h2 className="customer-form-title">Add Customer</h2> {/* Title */}
+              <form onSubmit={handleSubmit} className="customer-form">
+                  <label htmlFor="CustomerName">Customer Name</label>
+                  <input
+                      className="customer-form-input"
+                      type="text"
+                      placeholder="Enter customer name"
+                      value={formData.CustomerName}
+                      onChange={(e) => setFormData({ ...formData, CustomerName: e.target.value })}
+                      required // Add required attribute
+                  />
+                  <label htmlFor="MobileNo">Mobile Number</label>
+                  <input
+                      className="customer-form-input"
+                      type="text"
+                      id="MobileNo"
+                      placeholder="Enter mobile number"
+                      value={formData.MobileNo}
+                      onChange={(e) => setFormData({ ...formData, MobileNo: e.target.value })}
+                      required // Add required attribute
+                  />
+                  <button className="customer-form-button" type="submit">Submit</button>
+              </form>
+          </div>
+      </div>
+  );
 
-    );
 }
 
 export default CustomerForm;

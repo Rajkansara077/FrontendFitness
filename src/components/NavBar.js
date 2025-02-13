@@ -1,27 +1,43 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./NavBar.css";
 
 const Navbar = ({ isLoggedIn, handleLogout }) => {
-    return (
-        <div >
-            <div className="sidebar">
-                <nav className="sidebar-header">
-                    <Link to="/Dashboard" className="sidebar-link">Dashboard</Link>
-                    <Link to="/customerlist" className="sidebar-link">Customer</Link>
-                    <Link to="/transactionlist" className="sidebar-link">Transaction</Link>
-                    <Link to="/report" className="sidebar-link">Reports</Link>
-                    <Link to="/customervise" className="sidebar-link">Customer-Vise</Link>
-                </nav>
-            </div>
-            <div className="main-content">
-                <header className="top-nav">
-                    <h1 className="page-title">VIP AUTOMATED VEHICLE FITNESS TESTING CENTER</h1>
-                    {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
-                </header>
-            </div>
+  const location = useLocation();
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-content">
+        <div className="logo-container">
+        <h3 className="nav-title">VIP Automated Vehicle Fitness Testing Center</h3>
+          {/* <img src="/path/to/your/logo.png" alt="Logo" className="logo" /> */}
+          {/* OR <span className="logo-text">VIP Auto</span> */}
         </div>
-    );
+        <ul className="nav-links">
+          <li className="nav-item">
+            <Link to="/Dashboard" className={`nav-link ${location.pathname === '/Dashboard'? 'active': ''}`}>Dashboard</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/customerlist" className={`nav-link ${location.pathname === '/customerlist'? 'active': ''}`}>Customer</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/transactionlist" className={`nav-link ${location.pathname === '/transactionlist'? 'active': ''}`}>Transaction</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/report" className={`nav-link ${location.pathname === '/report'? 'active': ''}`}>Reports</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/customervise" className={`nav-link ${location.pathname === '/customervise'? 'active': ''}`}>Customer-Vise</Link>
+          </li>
+        </ul>
+        {isLoggedIn && (
+          <button onClick={handleLogout} className="logout-button">
+            Logout
+          </button>
+        )}
+      </div>
+    </nav>
+  );
 };
 
 export default Navbar;

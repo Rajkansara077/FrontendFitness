@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback ,useRef} from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-// import './TransactionPage.css'; // Add custom styles here
+import './CustomerVise.css'; // Add custom styles here
 import * as XLSX from 'xlsx'; 
 function TransactionList() {
     const navigate = useNavigate();
@@ -367,8 +367,8 @@ const filteredTransactions = transactions.filter((customer) =>
                         </td>
                         <td className="status-paid">{transaction.Notes || 'N/A'}</td>
                         <td>
-                            <button onClick={() => handleEditTranset(transaction)}>Edit</button>
-                            <button onClick={() => handleDeleteTransaction(transaction.TransactionId)}>Delete</button>
+                            <button className="Edit-paid-button" onClick={() => handleEditTranset(transaction)}>Edit</button>
+                            <button className="Edit-paid-button" onClick={() => handleDeleteTransaction(transaction.TransactionId)}>Delete</button>
                         </td>
                     </tr>
                 ))}

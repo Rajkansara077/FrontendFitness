@@ -92,93 +92,91 @@ function Report() {
 
 
 
-    return (
-        <> <div className="main-content">
-           
+return (
+    <>
+        <div className="main-content">
+            <main>
+                <h2 className="title">Transaction Report</h2>
+                <div className="filters">
+                    <div className="form-group">
+                        <label htmlFor="fromDate">From Date</label>
+                        <input
+                            type="date"
+                            id="fromDate"
+                            onClick={(e) => e.target.showPicker()}
+                            value={filters.fromDate}
+                            onChange={(e) => setFilters({ ...filters, fromDate: e.target.value })}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="toDate">To Date</label>
+                        <input
+                            type="date"
+                            id="toDate"
+                            value={filters.toDate}
+                            onClick={(e) => e.target.showPicker()}
+                            onChange={(e) => setFilters({ ...filters, toDate: e.target.value })}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="CustomerId">Select Customer</label>
+                        <select
+                            id="CustomerId"
+                            value={filters.customerId}
+                            onChange={(e) => setFilters({ ...filters, customerId: e.target.value })}
+                            required
+                        >
+                            <option value="">Select Customer</option>
+                            {customers.map((customer) => (
+                                <option key={customer.CustomerId} value={customer.CustomerId}>
+                                    {customer.CustomerName}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-                <main >
-                    {/* <div className="report-container"> */}
-                        <h2 className="title">Transaction Report</h2>
-                        <div className="filters">
-                            <div className="form-group">
-                                <label htmlFor="fromDate">From Date</label>
-                                <input
-                                    type="date"
-                                    id="fromDate"
-                                    onClick={(e) => e.target.showPicker()}
-                                    value={filters.fromDate}
-                                    onChange={(e) => setFilters({ ...filters, fromDate: e.target.value })} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="toDate">To Date</label>
-                                <input
-                                    type="date"
-                                    id="toDate"
-                                    value={filters.toDate}
-                                    onClick={(e) => e.target.showPicker()}
-                                    onChange={(e) => setFilters({ ...filters, toDate: e.target.value })} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="CustomerId">Select Customer</label>
-                                <select
-                                    id="CustomerId"
-                                    value={filters.customerId}
-                                    onChange={(e) => setFilters({ ...filters, customerId: e.target.value })}
-                                    required
-                                >
-                                    <option value="">Select Customer</option>
-                                    {customers.map((customer) => (
-                                        <option key={customer.CustomerId} value={customer.CustomerId}>
-                                            {customer.CustomerName}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                    <button className="generate-button" onClick={fetchReport}>
+                        Generate Report
+                    </button>
+                    <button className="export-button" onClick={exportToExcel}>
+                        Export to Excel
+                    </button>
+                </div>
 
-                            <button className="generate-button" onClick={fetchReport}>
-                                Generate Report
-                            </button>
-                            <button className="export-button" onClick={exportToExcel}>
-                                Export to Excel
-                            </button>
-                        </div>
-
-                        <table className="dashboard-table">
-                            <thead>
-                                <tr>
-                                    <th>Customer Name</th>
-                                    <th>Vehicle Type</th>
-                                    <th>Vehicle No</th>
-                                    <th>Notes</th>
-                                    <th>Operation Date</th>
+                <table className="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>Vehicle Type</th>
+                            <th>Vehicle No</th>
+                            <th>Notes</th>
+                            <th>Operation Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {report.length > 0 ? (
+                            report.map((entry) => (
+                                <tr key={entry.TransactionId}>
+                                    <td>{entry.Customer && entry.Customer.CustomerName ? entry.Customer.CustomerName : 'No Name Available'}</td>
+                                    <td>{entry.VehicleType}</td>
+                                    <td>{entry.VehicleNo}</td>
+                                    <td>{entry.Notes}</td>
+                                    <td>{new Date(entry.OperationDate).toLocaleDateString()}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {report.length > 0 ? (
-                                    report.map((entry) => (
-                                        <tr key={entry.TransactionId}>
-                                        <td>{entry.Customer && entry.Customer.CustomerName ? entry.Customer.CustomerName : 'No Name Available'}</td>
-
-                                            <td>{entry.VehicleType}</td>
-                                            <td>{entry.VehicleNo}</td>
-                                            <td>{entry.Notes}</td>
-                                            <td>{new Date(entry.OperationDate).toLocaleDateString()}</td>
-
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan="3" className="no-data">
-                                            No data available
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                        {/* Edit Customer Form */}
-
-                   </main></div></>
-    );
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="5" className="no-data">
+                                    No data available
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </>
+);
 }
 
 export default Report;
