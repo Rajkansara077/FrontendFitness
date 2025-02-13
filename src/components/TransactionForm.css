@@ -9,6 +9,7 @@
     background-size: cover;
     animation: gradientShift 10s ease infinite;
     padding: 20px;
+    width: 100%;
 }
 
 @keyframes gradientShift {
@@ -30,6 +31,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 90%;
+    margin: 0 auto; 
 }
 
 .transaction-form-title {
@@ -84,11 +86,10 @@
 
 .transaction-list-container {
     display: flex;
+    width: 100%;
     flex-direction: column;
     min-height: 100vh;
     /* background-image: url("path/to/your/texture.jpg"); Replace with your texture image path */
-    background-size: cover; /* or contain, depending on the texture */
-    background-repeat: no-repeat; /* Prevent texture repetition */
     padding: 20px;
     background: linear-gradient(to bottom right, #e0f2f7, #bbdefb); /* Light blue gradient background */
     background-size: cover; /* Cover the entire background */
@@ -99,11 +100,12 @@
 
 .transaction-list-content {
     flex-grow: 1;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
     border-radius: 8px;
     padding: 30px;
+    width: 90%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 

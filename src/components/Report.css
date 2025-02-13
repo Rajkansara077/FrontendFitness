@@ -5,12 +5,13 @@
     background-color: #f4f4f4; /* Light background color */
     min-height: 100vh; /* Ensure full viewport height */
     display: flex;
+    width: 100%;
     flex-direction: column; /* Align content vertically */
 }
 
 main {
     flex-grow: 1; /* Allow main to take up available space */
-    max-width: 1200px; /* Set a maximum width for the content */
+    width: 90%;/* Set a maximum width for the content */
     margin: 0 auto; /* Center the content horizontally */
     background-color: white; /* White background for the report area */
     padding: 30px;
@@ -28,6 +29,7 @@ main {
 
 .filters {
     display: flex;
+    width: 100%;
     flex-wrap: wrap; /* Allow filters to wrap */
     gap: 10px; /* Spacing between filter elements */
     margin-bottom: 20px;
@@ -35,6 +37,7 @@ main {
 }
 
 .form-group {
+    width: auto;
     margin-bottom: 15px; /* Space between form groups */
 }
 
@@ -48,6 +51,7 @@ main {
 .form-group input,
 .form-group select {
     padding: 8px;
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -98,7 +102,7 @@ main {
 }
 
 /* Responsive adjustments (example) */
-@media (max-width: 768px) {
+@media (max-width: 0px) {
     .filters {
         flex-direction: column; /* Stack filters vertically on smaller screens */
         align-items: center; /* Center the filters horizontally */

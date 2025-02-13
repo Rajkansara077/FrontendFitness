@@ -135,14 +135,14 @@ return (
   <div className="dashboard-container"> {/* Main container */}
     <div className="dashboard-content"> {/* Content area */}
       <div className="stats-grid">
-        <div className="stat-card">
+        <div className="stat-card-2">
           <div className="stat-icon"><i className="fas fa-users"></i></div> {/* Icon */}
           <div className="stat-info">
-            <span className="stat-label">Customers</span>
+            <span className="stat-label" >Customers</span>
             <p className="stat-value">{count.totalCustomers || 0}</p>
           </div>
         </div>
-        <div className="stat-card">
+        <div className="stat-card-1">
           <div className="stat-icon"><i className="fas fa-car"></i></div> {/* Icon */}
           <div className="stat-info">
             <span className="stat-label">Cars</span>
@@ -156,7 +156,7 @@ return (
             <p className="stat-value">₹{currentMonthTransactions.toLocaleString()}</p>
           </div>
         </div>
-        <div className="stat-card">
+        <div className="stat-card-3">
           <div className="stat-icon"><i className="fas fa-chart-line"></i></div> {/* Icon */}
           <div className="stat-info">
             <span className="stat-label">Overall Amount</span>

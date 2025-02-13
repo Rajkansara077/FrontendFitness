@@ -255,15 +255,17 @@ return (
                     </select>
                 </div>
 
-             
-
-            </div>
-            <button className="generate-button" onClick={fetchReport}>
+             <div className="form-group">
+             <button className="generate-button" onClick={fetchReport}>
                     Filter Data
                 </button>
                 <button className="generate-button" onClick={fetchTransaction}>
                     Reset Filters
                 </button>
+             </div>
+              
+            </div>
+          
             <div className="transaction-list-actions">
                 <Link to="/add-transaction">
                     <button className="transaction-list-add-button">Add Transaction</button>

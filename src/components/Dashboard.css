@@ -1,66 +1,137 @@
 /* Dashboard.css */
 .dashboard-container {
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack content vertically */
-  min-height: 100vh; /* Ensure full viewport height */
-  background-color: #f4f4f4; /* Light background */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f4f4f4;
   padding: 20px;
-  background-image: url('../assests/pexels-maltelu-1397751.jpg'); /* Add your background image path here */
-  background-size: cover; /* Ensure the background covers the whole container */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Prevent image repetition */
+  position: relative; /* Needed for pseudo-element */
+  background: linear-gradient(to bottom right, #e0f2f7, #bbdefb); /* Light blue gradient background */
+  background-size: cover; /* Cover the entire background */
+  animation: gradientShift 10s ease infinite; /* Gradient animation */
+}
+
+.dashboard-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assests/pexels-maltelu-1397751.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.3; /* Reduce image brightness */
+  z-index: -1;
 }
 
 .dashboard-content {
-  flex-grow: 1; /* Content takes up available space */
-  max-width: 1200px; /* Limit width for larger screens */
-  margin: 0 auto; /* Center the content */
+  flex-grow: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content */
 }
 
 .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: center; /* Align cards in one row */
   gap: 20px;
+  width: 100%;
   margin-bottom: 20px;
 }
 
 .stat-card {
-  background-color: #fff;
+  /* ... (Existing styles) ... */
+  background-color: #4CAF50; /* White card background */
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  display: flex; /* Align icon and info */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
   align-items: center;
+  width: 250px;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-card-1 {
+  /* ... (Existing styles) ... */
+  background-color: #E91E63; /* White card background */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  width: 250px;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-card-2 {
+  /* ... (Existing styles) ... */
+  background-color: #9389C7; /* White card background */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  width: 250px;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-card-3 {
+  /* ... (Existing styles) ... */
+  background-color: #6B6873; /* White card background */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  width: 250px;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+
 .stat-icon {
-  font-size: 2rem; /* Icon size */
-  color: #007bff; /* Blue icon color */
+  font-size: 2rem;
+  color: #6750A4; /* Primary blue color for icon */
   margin-right: 15px;
 }
 
 .stat-info {
-  flex-grow: 1; /* Info takes up available space */
+  flex-grow: 1;
 }
 
 .stat-label {
-  font-weight: bold;
-  color: #555;
+  font-weight: 500; /* Slightly less bold */
+  color: #fbfafc; /* Dark gray text color */
   margin-bottom: 5px;
+  font-size: 14px; /* Adjust font size */
 }
 
 .stat-value {
-  font-size: 1.2rem;
+  font-size: 1.5rem; /* Increased font size */
   font-weight: 600;
-  color: #333;
+  color: #f7f7f7; /* Darker text color */
   margin: 0;
 }
 
 .customer-section {
-  background-color: #fff;
+  background-color: #FFFFFF; /* White background */
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Align text to the left */
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px; /* Add some top margin */
 }
 
 .customer-select {
@@ -70,8 +141,9 @@
 .customer-select label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
+  font-weight: 500;
+  color: #49454F; /* Dark gray */
+  font-size: 16px;
 }
 
 .customer-dropdown {
@@ -79,13 +151,14 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  appearance: none; /* Remove default dropdown arrow */
+  appearance: none;
   background-color: #fff;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='rgba(0,0,0,0.5)' d='M7 10l5 5 5-5z'/%3e%3c/svg%3e"); /* Add custom arrow */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='rgba(0,0,0,0.5)' d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 1.5em 1.5em;
-  padding-right: 30px; /* Adjust padding for arrow */
+  padding-right: 30px;
+  font-size: 16px; /* Match label font size */
 }
 
 .customer-summary {
@@ -96,51 +169,17 @@
   border: 1px solid #eee;
   padding: 15px;
   border-radius: 5px;
+  background-color: #F7F5FA; /* Light gray background for summary card */
 }
 
 .summary-card p {
   margin: 5px 0;
-}
-.stat-card:hover {
-  transform: translateY(-5px); /* Move up slightly on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* More prominent shadow */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
+  color: #49454F; /* Dark gray text */
+  font-size: 16px;
 }
 
-/* Different card designs (examples) */
-
-/* Card with shadow */
-.card-shadow {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Card with border */
-.card-border {
-  border: 1px solid #eee;
-  padding: 15px;
-  border-radius: 5px;
-  background-color: #fff; /* Ensure background is white */
-}
-
-/* Card with gradient (example - customize colors) */
-.card-gradient {
-  background: linear-gradient(to bottom right, #e0f2f7, #bbdefb); /* Light blue gradient */
-  border-radius: 8px;
-  padding: 20px;
-  color: #333; /* Darker text for contrast */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Example of how to use different card styles */
-.stats-grid .stat-card:nth-child(2n) { /* Every even card */
-  @extend .card-gradient; /* Use gradient style */
-}
-
-.customer-summary .summary-card {
-  @extend .card-border; /* Use border style for summary */
+.summary-card strong {
+  font-weight: 500;
 }
 
 /* Responsive adjustments (example) */

@@ -31,7 +31,7 @@ function App() {
 
     return (
         <Router>
-            <div className="app-container">
+            {/* <div className="app-container"> */}
                 <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
                 <div className="content-container">
                     <Routes>
@@ -67,7 +67,7 @@ function App() {
                         <Route path="*" element={<Navigate to={isLoggedIn ? "/Dashboard" : "/"} replace />} />
                     </Routes>
                 </div>
-            </div>
+            {/* </div> */}
         </Router>
     );
 }

@@ -135,14 +135,15 @@ return (
                         </select>
                     </div>
 
-                    <button className="generate-button" onClick={fetchReport}>
+<div className="form-group"> <button className="generate-button" onClick={fetchReport}>
                         Generate Report
                     </button>
                     <button className="export-button" onClick={exportToExcel}>
                         Export to Excel
-                    </button>
+                    </button></div>
+                   
                 </div>
-
+           
                 <table className="dashboard-table">
                     <thead>
                         <tr>
